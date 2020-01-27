@@ -28,7 +28,6 @@ describe('web server', () => {
       .get('/api/v1/products')
       .then(results => {
         expect(results.status).toBe(200);
-        console.log('************************', results.body);
         expect(typeof results.body.results).toBe('object');
       });
   });
@@ -36,6 +35,25 @@ describe('web server', () => {
   it('respond properly to a post request to /api/v1/products', () => {
     return mockRequest
       .post('/api/v1/products')
+      .send({ name: 'test name' })
+      .then(results => {
+        expect(results.status).toBe(201);
+        expect(results.body.name).toEqual('test name');
+        expect(results.body).toBeDefined();
+      });
+  });
+  it('respond properly to a get request to /api/v1/categories', () => {
+    return mockRequest
+      .get('/api/v1/categories')
+      .then(results => {
+        expect(results.status).toBe(200);
+        expect(typeof results.body.results).toBe('object');
+      });
+  });
+
+  it('respond properly to a post request to /api/v1/categories', () => {
+    return mockRequest
+      .post('/api/v1/categories')
       .send({ name: 'test name' })
       .then(results => {
         expect(results.status).toBe(201);

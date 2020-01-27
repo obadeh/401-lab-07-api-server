@@ -13,8 +13,8 @@ class Model {
     return Promise.resolve(response);
   }
 
-  create(record) {
-    record.id = uuid();
+  create(record,id) {
+    record.id = id;
     this.database.push(record);
     return Promise.resolve(record);
   }

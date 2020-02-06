@@ -32,6 +32,26 @@ describe('web server', () => {
       });
   });
 
+  it('respond have time attached to request frome by middleware and attached to response', () => {
+    return mockRequest
+      .get('/api/v1/products')
+      .then(results => {
+        expect(results.body.time).toBeDefined();
+        expect(results.status).toBe(200);
+        
+      });
+  });
+
+  it('respond have count attached to request frome by middleware and attached to response', () => {
+    return mockRequest
+      .get('/api/v1/products')
+      .then(results => {
+        expect(typeof(results.body.count)).toBe('number');
+        expect(results.status).toBe(200);
+        
+      });
+  });
+
   it('respond properly to a post request to /api/v1/products', () => {
     return mockRequest
       .post('/api/v1/products')
